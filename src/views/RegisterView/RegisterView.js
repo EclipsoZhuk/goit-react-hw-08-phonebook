@@ -31,42 +31,49 @@ export default function RegisterView() {
     };
 
     return (
-        <div>
-            <h1>Registration Page</h1>
+        <>
+            <h2 className={s.title}>Sign Up</h2>
+            <div className={s.contactForm}>
+                <form onSubmit={handleSubmit} autoComplete="off">
+                    <label className={s.label}>
+                        Login
+                        <input
+                            className={s.formInput}
+                            type="text"
+                            name="name"
+                            value={name}
+                            placeholder="Your Full Name"
+                            onChange={handleChange}
+                        />
+                    </label>
 
-            <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
-                <label className={s.label}>
-                    Login
-                    <input
-                        type="text"
-                        name="name"
-                        value={name}
-                        onChange={handleChange}
-                    />
-                </label>
+                    <label className={s.label}>
+                        Email
+                        <input
+                            className={s.formInput}
+                            type="email"
+                            name="email"
+                            value={email}
+                            placeholder="Your Email"
+                            onChange={handleChange}
+                        />
+                    </label>
 
-                <label className={s.label}>
-                    Email
-                    <input
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={handleChange}
-                    />
-                </label>
+                    <label className={s.label}>
+                        Password
+                        <input
+                            className={s.formInput}
+                            type="password"
+                            name="password"
+                            value={password}
+                            placeholder="Your Password"
+                            onChange={handleChange}
+                        />
+                    </label>
 
-                <label className={s.label}>
-                    Password
-                    <input
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={handleChange}
-                    />
-                </label>
-
-                <button type="submit">Register</button>
-            </form>
-        </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </>
     );
 }

@@ -27,32 +27,41 @@ export default function LoginView() {
     };
 
     return (
-        <div>
-            <h1>Login Page</h1>
+        <>
+            <h2 className={s.title}>Log In</h2>
+            <div className={s.contactForm}>
+                <form
+                    onSubmit={handleSubmit}
+                    className={s.form}
+                    autoComplete="off"
+                >
+                    <label className={s.label}>
+                        Mail
+                        <input
+                            className={s.formInput}
+                            type="email"
+                            name="email"
+                            value={email}
+                            placeholder="Your Email"
+                            onChange={handleChange}
+                        />
+                    </label>
 
-            <form onSubmit={handleSubmit} className={s.form} autoComplete="off">
-                <label className={s.label}>
-                    Mail
-                    <input
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={handleChange}
-                    />
-                </label>
+                    <label className={s.label}>
+                        Password
+                        <input
+                            className={s.formInput}
+                            type="password"
+                            name="password"
+                            value={password}
+                            onChange={handleChange}
+                            placeholder="Your Password"
+                        />
+                    </label>
 
-                <label className={s.label}>
-                    Password
-                    <input
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={handleChange}
-                    />
-                </label>
-
-                <button type="submit">To come in</button>
-            </form>
-        </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </>
     );
 }

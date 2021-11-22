@@ -45,9 +45,10 @@ export default function ContactForm() {
     return (
         <div className={s.contactForm}>
             <form type="submit" onSubmit={handleSubmit}>
-                <label>
+                <label className={s.label}>
                     Name
                     <input
+                        placeholder="Contact name"
                         className={s.formInput}
                         type="text"
                         name="name"
@@ -58,11 +59,12 @@ export default function ContactForm() {
                         value={name}
                     />
                 </label>
-                <label>
+                <label className={s.label}>
                     Number
                     <input
                         className={s.formInput}
                         type="tel"
+                        placeholder="Contact number"
                         name="number"
                         pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
                         title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"

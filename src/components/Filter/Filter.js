@@ -7,11 +7,11 @@ export default function Filter() {
     const dispatch = useDispatch();
 
     return (
-        <label className={s.text}>
-            Find contacts by name
+        <label className={s.label}>
+            Find contacts by name:
             <input
                 placeholder="Search"
-                className={s.value}
+                className={s.formInput}
                 type="text"
                 value={filter}
                 onChange={e =>
