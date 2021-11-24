@@ -1,6 +1,6 @@
 import s from './Filter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { phonebookAction, phonebookSelector } from '../../redux/phoneBook';
+import { phonebookAction, phonebookSelector } from 'redux/phoneBook';
 
 export default function Filter() {
     const filter = useSelector(phonebookSelector.getFilter);

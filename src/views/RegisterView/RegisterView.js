@@ -1,7 +1,7 @@
-import s from './RegisterView.module.css';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { authOperations } from '../../redux/auth';
+import { authOperations } from 'redux/auth';
+import s from './RegisterView.module.css';
 
 export default function RegisterView() {
     const dispatch = useDispatch();

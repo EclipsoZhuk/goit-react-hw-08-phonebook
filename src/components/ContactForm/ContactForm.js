@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { phonebookSelector, phonebookOperation } from '../../redux/phoneBook';
+import { phonebookSelector, phonebookOperation } from 'redux/phoneBook';
 import s from './ContactForm.module.css';
 
 export default function ContactForm() {
@@ -43,39 +43,42 @@ export default function ContactForm() {
     };
 
     return (
-        <div className={s.contactForm}>
-            <form type="submit" onSubmit={handleSubmit}>
-                <label className={s.label}>
-                    Name
-                    <input
-                        placeholder="Contact name"
-                        className={s.formInput}
-                        type="text"
-                        name="name"
-                        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                        title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-                        required
-                        onChange={handleChange}
-                        value={name}
-                    />
-                </label>
-                <label className={s.label}>
-                    Number
-                    <input
-                        className={s.formInput}
-                        type="tel"
-                        placeholder="Contact number"
-                        name="number"
-                        pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
-                        title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
-                        required
-                        onChange={handleChange}
-                        value={number}
-                    />
-                </label>
+        <>
+            <h1 className={s.title}>Phonebook</h1>
+            <div className={s.contactForm}>
+                <form type="submit" onSubmit={handleSubmit}>
+                    <label className={s.label}>
+                        Name
+                        <input
+                            placeholder="Contact name"
+                            className={s.formInput}
+                            type="text"
+                            name="name"
+                            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+                            required
+                            onChange={handleChange}
+                            value={name}
+                        />
+                    </label>
+                    <label className={s.label}>
+                        Number
+                        <input
+                            className={s.formInput}
+                            type="tel"
+                            placeholder="Contact number"
+                            name="number"
+                            pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+                            title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
+                            required
+                            onChange={handleChange}
+                            value={number}
+                        />
+                    </label>
 
-                <button type="submit">Add contact</button>
-            </form>
-        </div>
+                    <button type="submit">Add contact</button>
+                </form>
+            </div>
+        </>
     );
 }

@@ -1,7 +1,7 @@
 import s from './ContactList.module.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { phonebookSelector, phonebookOperation } from '../../redux/phoneBook';
+import { phonebookSelector, phonebookOperation } from 'redux/phoneBook';
 
 export default function ContactList() {
     const contacts = useSelector(phonebookSelector.getFilterContacts);
@@ -12,21 +12,24 @@ export default function ContactList() {
     }, [dispatch]);
 
     return (
-        <ul className={s.list}>
-            {contacts.map(({ id, name, number }) => (
-                <li key={id}>
-                    <span className={s.text}>{`${name}: ${number}`}</span>
-                    <button
-                        className={s.buttonDelete}
-                        type="button"
-                        onClick={() =>
-                            dispatch(phonebookOperation.deleteContact(id))
-                        }
-                    >
-                        Delete
-                    </button>
-                </li>
-            ))}
-        </ul>
+        <>
+            <h2 className={s.title}>Contacts</h2>
+            <ul className={s.list}>
+                {contacts.map(({ id, name, number }) => (
+                    <li key={id}>
+                        <span className={s.text}>{`${name}: ${number}`}</span>
+                        <button
+                            className={s.buttonDelete}
+                            type="button"
+                            onClick={() =>
+                                dispatch(phonebookOperation.deleteContact(id))
+                            }
+                        >
+                            Delete
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </>
     );
 }
