@@ -1,18 +1,25 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Switch, Route } from 'react-router';
 import { phonebookSelector } from '../../redux/phoneBook';
+import { authOperations } from '../../redux/auth';
 import Container from '../Container';
 import ContactForm from '../ContactForm';
-// import ContactList from '../ContactList';
+import ContactList from '../ContactList';
 import Filter from '../Filter';
 import s from './App.module.css';
 import RegisterView from '../../views/RegisterView';
 import LoginView from '../../views/LoginView';
 import AppBar from '../AppBar';
 import HomeView from '../../views/HomeView';
-import { Switch, Route } from 'react-router';
 
 export default function App() {
     const loading = useSelector(phonebookSelector.getLoading);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(authOperations.fetchCurrentUser());
+    }, [dispatch]);
 
     return (
         <>
@@ -30,7 +37,7 @@ export default function App() {
                         {loading && (
                             <h1 className={s.contactTitle}>Loading...</h1>
                         )}
-                        {/* <ContactList /> */}
+                        <ContactList />
                     </Route>
                 </Switch>
             </Container>
