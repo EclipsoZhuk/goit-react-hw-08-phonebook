@@ -1,58 +1,91 @@
 import { createSlice } from '@reduxjs/toolkit';
-import authOperations from './auth-operation';
+import authActions from './auth-action';
+
+const {
+    registerRequest,
+    registerSuccess,
+    registerError,
+    logInRequest,
+    logInSuccess,
+    logInError,
+    logoutRequest,
+    logoutSuccess,
+    logoutError,
+    getCurrentUserRequest,
+    getCurrentUserSuccess,
+    getCurrentUserError,
+} = authActions;
 
 const initialState = {
-    user: { name: '', email: '' },
-    token: '',
+    user: { name: null, email: null },
+    token: null,
     isLoggedIn: false,
     isLoading: false,
+    error: null,
+    isFetchingCurrentUser: false,
 };
 
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     extraReducers: {
-        [authOperations.register.fulfilled](state, { payload }) {
+        [registerRequest]: state => {
+            state.isLoading = true;
+        },
+        [registerSuccess]: (state, { payload }) => {
             state.user = payload.user;
             state.token = payload.token;
             state.isLoggedIn = true;
             state.isLoading = false;
         },
-        [authOperations.register.pending](state) {
+        [registerError]: (state, { payload }) => {
+            state.error = payload;
+        },
+        //
+        //
+        [logInRequest]: state => {
             state.isLoading = true;
         },
-
-        [authOperations.logIn.fulfilled](state, { payload }) {
+        [logInSuccess]: (state, { payload }) => {
             state.user = payload.user;
             state.token = payload.token;
             state.isLoggedIn = true;
             state.isLoading = false;
         },
-        [authOperations.logIn.pending](state) {
+        [logInError]: (state, { payload }) => {
+            state.error = payload;
+        },
+        //
+        //
+        [logoutRequest]: state => {
             state.isLoading = true;
         },
-
-        [authOperations.logOut.fulfilled](state) {
-            state.user = { name: '', email: '' };
-            state.token = '';
+        [logoutSuccess]: state => {
+            state.user = { name: null, email: null };
+            state.token = null;
             state.isLoggedIn = false;
             state.isLoading = false;
+            state.error = null;
         },
-        [authOperations.logOut.pending](state) {
+        [logoutError]: (state, { payload }) => {
+            state.error = payload;
+        },
+        //
+        //
+        [getCurrentUserRequest]: state => {
             state.isLoading = true;
+            state.isFetchingCurrentUser = true;
         },
-
-        [authOperations.fetchCurrentUser.fulfilled](state, { payload }) {
+        [getCurrentUserSuccess]: (state, { payload }) => {
             state.user = payload;
             state.isLoggedIn = true;
             state.isLoading = false;
+            state.isFetchingCurrentUser = false;
         },
-        [authOperations.fetchCurrentUser.pending](state) {
-            state.isLoading = true;
+        [getCurrentUserError]: state => {
+            state.isLoading = false;
+            state.isFetchingCurrentUser = false;
         },
-        // [authOperations.fetchCurrentUser.rejected](state, action) {
-        //     state.error = action.error.message;
-        // },
     },
 });
 

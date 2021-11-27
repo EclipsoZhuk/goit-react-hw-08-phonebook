@@ -6,7 +6,6 @@
     border-radius: 30px;
     margin-top: 10px;
     padding-left: 15px;
-    background-color: rgba(190, 195, 214, 0.9);
-    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+    background-color: rgba(54, 54, 54, 0.9);
     padding-right: 15px;
 }

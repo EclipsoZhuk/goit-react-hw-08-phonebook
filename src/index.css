@@ -5,13 +5,44 @@ body {
         'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-image: url(./images/bgImages.jpg);
-    background-position: center -100px;
+    background-image: url('https://images.wallpaperscraft.ru/image/single/chernyy_fon_krasnyy_cvet_kraska_vzryv_vsplesk_9844_1920x1200.jpg');
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
 }
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
+}
+
+button {
+    background-color: #1b39e2;
+    color: white;
+    border-radius: 7px;
+    border-color: #1b39e2;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0a0131ab;
+    color: white;
+    border-color: #1b39e2;
+}
+
+button:disabled {
+    cursor: auto;
+    background-color: #0a0131ab;
+    text-decoration: line-through;
+}
+
+.Spinner {
+    position: absolute;
+    top: 15%;
+    right: 40%;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -1,15 +1,12 @@
-import s from './ContactList.module.css';
-import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { phonebookSelector, phonebookOperation } from 'redux/phoneBook';
+import { getFilterContacts } from 'redux/phoneBook/phonebook-selector';
+import { deleteContact } from 'redux/phoneBook/phonebook-operations';
+import s from './ContactList.module.css';
 
 export default function ContactList() {
-    const contacts = useSelector(phonebookSelector.getFilterContacts);
+    const contacts = useSelector(getFilterContacts);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(phonebookOperation.fetchContacts());
-    }, [dispatch]);
 
     return (
         <>
@@ -21,9 +18,16 @@ export default function ContactList() {
                         <button
                             className={s.buttonDelete}
                             type="button"
-                            onClick={() =>
-                                dispatch(phonebookOperation.deleteContact(id))
-                            }
+                            onClick={() => {
+                                dispatch(deleteContact(id));
+                                toast.success(
+                                    `Contact ${name} ${number} deleted!`,
+                                    {
+                                        position: 'top-center',
+                                        autoClose: 2500,
+                                    },
+                                );
+                            }}
                         >
                             Delete
                         </button>

@@ -1,10 +1,14 @@
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { authOperations } from 'redux/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
+import { toast } from 'react-toastify';
+import { register } from 'redux/auth/auth-operation';
+import { getIsLoggedIn } from 'redux/auth/auth-selectors';
 import s from './RegisterView.module.css';
 
 export default function RegisterView() {
     const dispatch = useDispatch();
+    const isLoggedIn = useSelector(getIsLoggedIn);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,13 +22,17 @@ export default function RegisterView() {
             case 'password':
                 return setPassword(value);
             default:
-                break;
+                return;
         }
     };
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(authOperations.register({ name, email, password }));
+        dispatch(register({ name, email, password }));
+        toast.success(`Welcome, ${name}!`, {
+            position: 'top-center',
+            autoClose: 2500,
+        });
         setEmail('');
         setName('');
         setPassword('');
@@ -34,7 +42,7 @@ export default function RegisterView() {
         <>
             <h2 className={s.title}>Sign Up</h2>
             <div className={s.contactForm}>
-                <form onSubmit={handleSubmit} autoComplete="off">
+                <form onSubmit={handleSubmit}>
                     <label className={s.label}>
                         Login
                         <input
@@ -71,8 +79,14 @@ export default function RegisterView() {
                         />
                     </label>
 
-                    <button type="submit">Submit</button>
+                    <button
+                        type="submit"
+                        disabled={!name || !email || !password}
+                    >
+                        Submit
+                    </button>
                 </form>
+                {isLoggedIn && <Redirect to="/" />}
             </div>
         </>
     );

@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { phonebookSelector, phonebookOperation } from 'redux/phoneBook';
+import { toast } from 'react-toastify';
+import { addContact } from 'redux/phoneBook/phonebook-operations';
+import { getContacts } from 'redux/phoneBook/phonebook-selector';
 import s from './ContactForm.module.css';
 
 export default function ContactForm() {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
-    const contacts = useSelector(phonebookSelector.getContacts);
+    const contacts = useSelector(getContacts);
     const dispatch = useDispatch();
 
     const handleChange = e => {
@@ -36,7 +38,11 @@ export default function ContactForm() {
         } else if (!name.trim() || !number.trim()) {
             alert("Enter the contact's name and number phone!");
         } else {
-            dispatch(phonebookOperation.addContact({ name, number }));
+            dispatch(addContact({ name, number }));
+            toast.success('Contact added to the phonebook!', {
+                position: 'top-center',
+                autoClose: 2500,
+            });
             setName('');
             setNumber('');
         }
@@ -76,7 +82,9 @@ export default function ContactForm() {
                         />
                     </label>
 
-                    <button type="submit">Add contact</button>
+                    <button type="submit" disabled={!name || !number}>
+                        Add contact
+                    </button>
                 </form>
             </div>
         </>

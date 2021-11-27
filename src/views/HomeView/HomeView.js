@@ -1,5 +1,10 @@
 import s from './HomeView.module.css';
 
 export default function HomeView() {
-    return <h1 className={s.title}>Log in or Sign UP</h1>;
+    return (
+        <h1 className={s.title}>
+            <b className={s.text}>Welcome!</b> To use the Phone Book <br />
+            Log in or Sign UP
+        </h1>
+    );
 }

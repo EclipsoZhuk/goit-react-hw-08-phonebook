@@ -1,6 +1,6 @@
 .title {
     margin: 0;
-    padding-top: 10px;
+    padding-top: 30px;
     margin-bottom: 10px;
     font-size: 30px;
     font-weight: bold;
@@ -18,4 +18,5 @@
 .text {
     text-shadow: 0 0 15px #4444e9;
     font-weight: 600;
+    color: #c5e4f1;
 }

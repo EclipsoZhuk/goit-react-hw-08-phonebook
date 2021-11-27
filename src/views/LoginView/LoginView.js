@@ -1,12 +1,22 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { authOperations } from 'redux/auth';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
+import { toast } from 'react-toastify';
+import { logIn } from 'redux/auth/auth-operation';
 import s from './LoginView.module.css';
+import { getAuthError, getIsLoggedIn } from 'redux/auth/auth-selectors';
 
 export default function LoginView() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
     const dispatch = useDispatch();
+    const isUserError = useSelector(getAuthError);
+    const isLoggedIn = useSelector(getIsLoggedIn);
+
+    useEffect(() => {
+        setError(isUserError);
+    }, [isUserError]);
 
     const handleChange = ({ target: { name, value } }) => {
         switch (name) {
@@ -21,20 +31,20 @@ export default function LoginView() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(authOperations.logIn({ email, password }));
+        dispatch(logIn({ email, password }));
+        toast.success(`Welcome, ${email}!`, {
+            position: 'top-center',
+            autoClose: 2500,
+        });
         setEmail('');
         setPassword('');
     };
 
-    return (
+    return !isLoggedIn ? (
         <>
             <h2 className={s.title}>Log In</h2>
             <div className={s.contactForm}>
-                <form
-                    onSubmit={handleSubmit}
-                    className={s.form}
-                    autoComplete="off"
-                >
+                <form onSubmit={handleSubmit} className={s.form}>
                     <label className={s.label}>
                         Mail
                         <input
@@ -59,9 +69,16 @@ export default function LoginView() {
                         />
                     </label>
 
-                    <button type="submit">Submit</button>
+                    <button
+                        type="submit"
+                        disabled={!email && !password && !error}
+                    >
+                        Submit
+                    </button>
                 </form>
             </div>
         </>
+    ) : (
+        <Redirect to="/contacts" />
     );
 }
