@@ -31,10 +31,12 @@ export const deleteContact = createAsyncThunk(
     'phonebook/deleteContact',
     async (contactId, { rejectWithValue }) => {
         try {
-            const {
-                data: { id },
-            } = await axios.delete(`/contacts/${contactId}`);
-            return id;
+            const { status } = await axios.delete(`/contacts/${contactId}`);
+            if (status === 200) {
+                return contactId;
+            } else {
+                throw new Error({ message: 'error' });
+            }
         } catch (error) {
             return rejectWithValue(error.message);
         }

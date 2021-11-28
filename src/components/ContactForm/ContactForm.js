@@ -32,11 +32,20 @@ export default function ContactForm() {
                 contact => contact.name.toLowerCase() === name.toLowerCase(),
             )
         ) {
-            alert(`${name} is already in contacts.`);
+            toast.warning(`${name} is already in contacts!`, {
+                position: 'top-center',
+                autoClose: 2500,
+            });
         } else if (contacts.find(contact => contact.number === number)) {
-            alert(`${number} is already in contacts.`);
+            toast.warning(`${number} is already in contacts!`, {
+                position: 'top-center',
+                autoClose: 2500,
+            });
         } else if (!name.trim() || !number.trim()) {
-            alert("Enter the contact's name and number phone!");
+            toast.warning(`Enter the contact's name and number phone!`, {
+                position: 'top-center',
+                autoClose: 2500,
+            });
         } else {
             dispatch(addContact({ name, number }));
             toast.success('Contact added to the phonebook!', {
