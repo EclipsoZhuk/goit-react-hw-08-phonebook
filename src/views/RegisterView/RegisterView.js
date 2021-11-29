@@ -74,6 +74,7 @@ export default function RegisterView() {
                             type="password"
                             name="password"
                             value={password}
+                            minlength="8"
                             placeholder="Your Password"
                             onChange={handleChange}
                         />
